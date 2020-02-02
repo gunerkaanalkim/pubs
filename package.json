@@ -3,11 +3,6 @@
   "scripts": {
     "test": "jest --coverage"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn test"
-    }
-  },
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/gunerkaanalkim/pub-sub.git",
