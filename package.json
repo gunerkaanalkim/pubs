@@ -1,0 +1,23 @@
+{
+  "name": "pub-sub",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/gunerkaanalkim/pub-sub.git",
+  "author": "Kaan Alkim <g.kaanalkim@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^25.1.1",
+    "husky": "^4.2.1",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.1.0",
+    "typescript": "^3.7.5"
+  }
+}
