@@ -2,14 +2,8 @@ import Publisher from "../../src/publisher/publisher";
 import Eventbus from "../../src/eventbus/eventbus";
 
 describe("Publisher's Unit Tests", () => {
-    it("should be initialized with constructor and add a publisher", () => {
-        interface Filmography {
-            name: string,
-            surname: string,
-            filmography: Array<string>
-        }
-
-        let pub = new Publisher<Filmography>({
+    it("should be initialized with constructor", () => {
+        let pub = new Publisher({
             topic: "topic_1",
             state: {
                 name: "Patrick",
