@@ -11,9 +11,12 @@ describe("Publisher's Unit Tests", () => {
         });
 
         expect(sub.id).toBe("sub_1");
+        expect(sub.topic).toBe("topic_1");
 
         sub.id = "another_sub";
+        sub.topic = "another_topic";
 
         expect(sub.id).toBe("another_sub");
+        expect(sub.topic).toBe("another_topic");
     });
 });

@@ -23,4 +23,12 @@ export default class Subsciber {
     set id(value: string) {
         this._id = value;
     }
+
+    get topic(): string {
+        return this._topic;
+    }
+
+    set topic(value: string) {
+        this._topic = value;
+    }
 }
