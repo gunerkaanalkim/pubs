@@ -71,7 +71,7 @@ describe("Publisher's Unit Tests", () => {
         expect(state).toStrictEqual({
             name: "Patrick",
             surname: "Swayze",
-            filmograpgy: ["Ghost"]
+            filmography: ["Ghost"]
         });
     });
 });
