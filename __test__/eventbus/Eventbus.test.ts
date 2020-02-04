@@ -1,7 +1,7 @@
 import Publisher from "../../src/publisher/publisher";
 import Eventbus from "../../src/eventbus/eventbus";
 
-describe("Publisher's Unit Tests", () => {
+describe("Eventbus's Unit Tests", () => {
     it("should be initialized with constructor", () => {
         let pub = new Publisher({
             topic: "topic_1",
