@@ -23,13 +23,7 @@ describe("Publisher's Unit Tests", () => {
     });
 
     it("Publisher's setter/getter methods for state and topics.", () => {
-        interface Filmograpgy {
-            name: string,
-            surname: string,
-            filmograpgy: Array<string>
-        }
-
-        let pub = new Publisher<Filmograpgy>();
+        let pub = new Publisher();
         pub.topic = "topic_2";
         pub.state = {
             name: "Patrick",
@@ -49,13 +43,7 @@ describe("Publisher's Unit Tests", () => {
     });
 
     it("should send a state object with Publisher's send method.", () => {
-        interface Filmography {
-            name: string,
-            surname: string,
-            filmography: Array<string>
-        }
-
-        let pub = new Publisher<Filmography>();
+        let pub = new Publisher();
         pub.topic = "topic_2";
 
         pub.send({
