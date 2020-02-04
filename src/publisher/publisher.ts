@@ -1,6 +1,6 @@
 interface PublisherOption<T> {
     topic: string;
-    state: T;
+    state?: T;
 }
 
 export default class Publisher<T> {
