@@ -1,18 +1,18 @@
-interface PublisherOption<T> {
+interface PublisherOption {
     topic: string;
-    state?: T;
+    state?: any;
 }
 
-export default class Publisher<T> {
+export default class Publisher {
     private _topic: string = undefined;
-    private _state: T = undefined;
+    private _state: any = undefined;
 
-    constructor(option?: PublisherOption<T>) {
+    constructor(option?: PublisherOption) {
         this._topic = option?.topic;
         this._state = option?.state;
     }
 
-    send(state: T): Publisher<T> {
+    send(state: any): Publisher {
         this._state = state;
 
         return this;
@@ -26,11 +26,11 @@ export default class Publisher<T> {
         this._topic = value;
     }
 
-    get state(): T {
+    get state(): any {
         return this._state;
     }
 
-    set state(value: T) {
+    set state(value: any) {
         this._state = value;
     }
 }
