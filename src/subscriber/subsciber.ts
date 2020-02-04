@@ -31,4 +31,12 @@ export default class Subsciber {
     set topic(value: string) {
         this._topic = value;
     }
+
+    get callback(): Function {
+        return this._callback;
+    }
+
+    set callback(value: Function) {
+        this._callback = value;
+    }
 }
