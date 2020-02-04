@@ -1,4 +1,4 @@
-export default class Subsciber<T> {
+export default class Subsciber {
     private _id: string;
     topic: string;
 
