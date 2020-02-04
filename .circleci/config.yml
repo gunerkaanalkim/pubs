@@ -27,9 +27,6 @@ jobs:
             - v1-dependencies-
 
       - run: yarn install
-      - store_artifacts:
-          path: coverage
-          destination: coverage
 
       - save_cache:
           paths:
