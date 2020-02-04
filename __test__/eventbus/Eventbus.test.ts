@@ -3,13 +3,7 @@ import Eventbus from "../../src/eventbus/eventbus";
 
 describe("Publisher's Unit Tests", () => {
     it("should be initialized with constructor", () => {
-        interface Filmography {
-            name: string,
-            surname: string,
-            filmography: Array<string>
-        }
-
-        let pub = new Publisher<Filmography>({
+        let pub = new Publisher({
             topic: "topic_1",
             state: {
                 name: "Patrick",
