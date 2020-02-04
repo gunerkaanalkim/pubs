@@ -1,7 +1,7 @@
 {
   "name": "pub-sub",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --collectCoverage=true"
   },
   "version": "1.0.0",
   "main": "index.js",
