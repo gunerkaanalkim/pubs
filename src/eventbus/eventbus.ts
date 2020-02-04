@@ -50,12 +50,15 @@ export default class Eventbus {
 
     private _addSubscriber(subscriber: Subsciber): Eventbus {
         const {id, topic, callback} = subscriber;
+        const state = this._bus[topic]["state"];
 
         if (Array.isArray(topic)) {
             return null;
         } else {
             if (this._bus.hasOwnProperty(topic)) {
-                this._bus[topic]["subscribers"][id] = subscriber
+                this._bus[topic]["subscribers"][id] = subscriber;
+
+                this._fireSubscriber(subscriber, state, callback);
             }
 
             return this;
@@ -70,5 +73,9 @@ export default class Eventbus {
         }
 
         return this;
+    }
+
+    private _fireSubscriber(context: Subsciber, state: object, callback: Function): void {
+        callback.call(context, state);
     }
 }
