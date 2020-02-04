@@ -11,6 +11,13 @@ export default class Eventbus {
         remove: this._removePublisher.bind(this)
     };
 
+    public subscriber = {
+        add: this._addSubscriber.bind(this),
+        size: this._subscribersLength.bind(this),
+        isEmpty: this._subscribersIsEmpty.bind(this),
+        remove: this._removeSubscriber.bind(this)
+    };
+
     private _addPublisher(publisher: Publisher): Eventbus {
         this._publishers.push(publisher);
 
@@ -25,6 +32,30 @@ export default class Eventbus {
         }
 
         return this;
+    }
+
+    private _addSubscriber(subscriber: Subsciber): Eventbus {
+        this._subscribers.push(subscriber);
+
+        return this;
+    }
+
+    private _removeSubscriber(subscriber: Subsciber): Eventbus {
+        const idx = this._subscribers.indexOf(subscriber);
+
+        if (idx !== -1) {
+            this._subscribers.splice(idx, 1)
+        }
+
+        return this;
+    }
+
+    private _subscribersIsEmpty(): boolean {
+        return this._subscribers.length === 0;
+    }
+
+    private _subscribersLength(): number {
+        return this._subscribers.length;
     }
 
     public getTopics(): Array<string> {
