@@ -26,7 +26,7 @@ describe("Publisher's Unit Tests", () => {
         interface Filmograpgy {
             name: string,
             surname: string,
-            filmograpgy: [string]
+            filmograpgy: Array<string>
         }
 
         let pub = new Publisher<Filmograpgy>();
