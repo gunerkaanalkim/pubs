@@ -49,19 +49,19 @@ describe("Publisher's Unit Tests", () => {
     });
 
     it("should send a state object with Publisher's send method.", () => {
-        interface Filmograpgy {
+        interface Filmography {
             name: string,
             surname: string,
-            filmograpgy: Array<string>
+            filmography: Array<string>
         }
 
-        let pub = new Publisher<Filmograpgy>();
+        let pub = new Publisher<Filmography>();
         pub.topic = "topic_2";
 
         pub.send({
             name: "Patrick",
             surname: "Swayze",
-            filmograpgy: ["Ghost"]
+            filmography: ["Ghost"]
         });
 
         const topicName = pub.topic;
@@ -71,7 +71,7 @@ describe("Publisher's Unit Tests", () => {
         expect(state).toStrictEqual({
             name: "Patrick",
             surname: "Swayze",
-            filmograpgy: ["Ghost"]
+            filmography: ["Ghost"]
         });
     });
 });
