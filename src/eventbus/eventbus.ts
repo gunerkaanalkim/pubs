@@ -1,6 +1,7 @@
 import Publisher from "../publisher/publisher";
 import Subsciber from "../subscriber/subsciber";
 import {BusKeys} from "../constant/BusKeys";
+import publisher from "../publisher/publisher";
 
 export default class Eventbus {
     private _bus = {};
@@ -21,6 +22,7 @@ export default class Eventbus {
         this._resetTopicIfExist(topic);
 
         this._publishToBus(topic, state, {});
+        this._setEventbusToPublisher(publisher, this._bus);
 
         return this;
     }
@@ -43,7 +45,7 @@ export default class Eventbus {
 
         if (this._hasTopic(topic)) {
             this._addSubscriberToPublisher(topic, id, subscriber);
-
+            this._setEventbusToSubscriber(subscriber, this._bus);
             this._fireSubscriber(subscriber, state, callback);
         }
 
@@ -77,7 +79,7 @@ export default class Eventbus {
     }
 
     /**
-     * Bus Mutators
+     * Mutators
      * **/
 
     private _resetTopicIfExist(topic: string) {
@@ -104,5 +106,17 @@ export default class Eventbus {
 
     private _resetSubscriberIfExist(topic: string, id: string) {
         delete this._bus[topic][BusKeys.SUBSCRIBERS][id];
+    }
+
+    private _setEventbusToPublisher(publisher: Publisher, bus: object): Publisher {
+        publisher.eventbus = this;
+
+        return publisher;
+    }
+
+    private _setEventbusToSubscriber(subscriber: Subsciber, bus: object): Subsciber {
+        subscriber.eventbus = this;
+
+        return subscriber;
     }
 }

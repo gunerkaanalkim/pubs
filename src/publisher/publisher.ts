@@ -1,3 +1,5 @@
+import Eventbus from "../eventbus/eventbus";
+
 interface PublisherOption {
     topic: string;
     state?: any;
@@ -6,6 +8,7 @@ interface PublisherOption {
 export default class Publisher {
     private _topic: string = undefined;
     private _state: any = undefined;
+    private _eventbus: Eventbus = undefined;
 
     constructor(option?: PublisherOption) {
         this._topic = option?.topic;
@@ -32,5 +35,14 @@ export default class Publisher {
 
     set state(value: any) {
         this._state = value;
+    }
+
+
+    get eventbus(): Eventbus {
+        return this._eventbus;
+    }
+
+    set eventbus(value: Eventbus) {
+        this._eventbus = value;
     }
 }
