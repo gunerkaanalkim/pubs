@@ -1,3 +1,5 @@
+import Eventbus from "../eventbus/eventbus";
+
 interface SubscriberOption {
     id: string;
     topic: string,
@@ -8,6 +10,7 @@ export default class Subsciber {
     private _id: string;
     private _topic: string;
     private _callback: Function;
+    private _eventbus: Eventbus = undefined;
 
     constructor(option?: SubscriberOption) {
         this._id = option?.id;
@@ -38,5 +41,13 @@ export default class Subsciber {
 
     set callback(value: Function) {
         this._callback = value;
+    }
+
+    get eventbus(): Eventbus {
+        return this._eventbus;
+    }
+
+    set eventbus(value: Eventbus) {
+        this._eventbus = value;
     }
 }
