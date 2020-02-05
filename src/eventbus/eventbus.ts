@@ -1,5 +1,6 @@
 import Publisher from "../publisher/publisher";
 import Subsciber from "../subscriber/subsciber";
+import {BusKeys} from "../constant/BusKeys";
 
 export default class Eventbus {
     private _bus = {};
@@ -17,11 +18,9 @@ export default class Eventbus {
     private _addPublisher(publisher: Publisher): Eventbus {
         const {topic, state} = publisher;
 
-        if (this._bus.hasOwnProperty(topic)) {
-            this._bus[topic] = {};
-        }
+        this._resetTopicIfExist(topic);
 
-        this._bus[publisher.topic] = {state: state, subscribers: {}};
+        this._publishToBus(topic, state, {});
 
         return this;
     }
@@ -29,8 +28,33 @@ export default class Eventbus {
     private _removePublisher(publisher: Publisher): Eventbus {
         const {topic} = publisher;
 
-        if (this._bus.hasOwnProperty(topic)) {
-            delete this._bus[topic];
+        this._resetTopicIfExist(topic);
+
+        return this;
+    }
+
+    private _addSubscriber(subscriber: Subsciber): Eventbus {
+        const {id, topic, callback} = subscriber;
+        const state = this._getStateByTopic(topic);
+
+        if (Array.isArray(topic)) {
+            return this;
+        }
+
+        if (this._hasTopic(topic)) {
+            this._addSubscriberToPublisher(topic, id, subscriber);
+
+            this._fireSubscriber(subscriber, state, callback);
+        }
+
+        return this;
+    }
+
+    private _removeSubscriber(subscriber: Subsciber): Eventbus {
+        const {id, topic} = subscriber;
+
+        if (this._hasTopic(topic)) {
+            this._resetSubscriberIfExist(topic, id);
         }
 
         return this;
@@ -48,27 +72,37 @@ export default class Eventbus {
         return this._bus;
     }
 
-    private _addSubscriber(subscriber: Subsciber): Eventbus {
-        const {id, topic, callback} = subscriber;
+    private _fireSubscriber(context: Subsciber, state: object, callback: Function): void {
+        callback.call(context, state);
+    }
 
-        if (Array.isArray(topic)) {
-            return null;
-        } else {
-            if (this._bus.hasOwnProperty(topic)) {
-                this._bus[topic]["subscribers"][id] = subscriber
-            }
+    /**
+     * Bus Mutators
+     * **/
 
-            return this;
+    private _resetTopicIfExist(topic: string) {
+        if (this._bus.hasOwnProperty(topic)) {
+            delete this._bus[topic];
         }
     }
 
-    private _removeSubscriber(subscriber: Subsciber): Eventbus {
-        const {id, topic} = subscriber;
+    private _publishToBus(topic: string, state: object, subscribers: object): void {
+        this._bus[topic] = {state: state, subscribers: subscribers};
+    }
 
-        if (this._bus.hasOwnProperty(topic)) {
-            delete this._bus[topic]["subscribers"][id];
-        }
+    private _getStateByTopic(topic: string): object {
+        return this._bus[topic][BusKeys.STATE];
+    }
 
-        return this;
+    private _addSubscriberToPublisher(topic: string, id: string, subscriber: object): void {
+        this._bus[topic][BusKeys.SUBSCRIBERS][id] = subscriber;
+    }
+
+    private _hasTopic(topic: string): boolean {
+        return this._bus.hasOwnProperty(topic);
+    }
+
+    private _resetSubscriberIfExist(topic: string, id: string) {
+        delete this._bus[topic][BusKeys.SUBSCRIBERS][id];
     }
 }
