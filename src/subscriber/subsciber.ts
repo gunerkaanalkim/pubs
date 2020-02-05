@@ -2,13 +2,13 @@ import Eventbus from "../eventbus/eventbus";
 
 interface SubscriberOption {
     id: string;
-    topic: string,
+    topic: any,
     callback: Function
 }
 
 export default class Subsciber {
     private _id: string;
-    private _topic: string;
+    private _topic: any;
     private _callback: Function;
     private _eventbus: Eventbus = undefined;
 
