@@ -37,16 +37,15 @@ export default class Eventbus {
 
     private _addSubscriber(subscriber: Subsciber): Eventbus {
         const {id, topic, callback} = subscriber;
-        const state = this._getStateByTopic(topic);
-
-        if (Array.isArray(topic)) {
-            return this;
-        }
 
         if (this._hasTopic(topic)) {
+            const state = this._getStateByTopic(topic);
+
             this._addSubscriberToPublisher(topic, id, subscriber);
             this._setEventbusToSubscriber(subscriber, this._bus);
             this._fireSubscriber(subscriber, state, callback);
+        } else {
+            throw new Error("Topic not found on eventbus!");
         }
 
         return this;
@@ -92,16 +91,48 @@ export default class Eventbus {
         this._bus[topic] = {state: state, subscribers: subscribers};
     }
 
-    private _getStateByTopic(topic: string): object {
+    private _getStateByTopic(topic: any): any {
+
+        if (Array.isArray(topic)) {
+            let states = {};
+
+            for (let tp of topic) {
+                const state = this._bus[tp][BusKeys.STATE];
+                states[tp] = state;
+            }
+
+            return states;
+        }
+
         return this._bus[topic][BusKeys.STATE];
     }
 
     private _addSubscriberToPublisher(topic: string, id: string, subscriber: object): void {
-        this._bus[topic][BusKeys.SUBSCRIBERS][id] = subscriber;
+        if (Array.isArray(topic)) {
+            for (let tp of topic) {
+                this._bus[tp][BusKeys.SUBSCRIBERS][id] = subscriber;
+            }
+        } else {
+            this._bus[topic][BusKeys.SUBSCRIBERS][id] = subscriber;
+        }
     }
 
     private _hasTopic(topic: string): boolean {
-        return this._bus.hasOwnProperty(topic);
+        let has = true;
+
+        if (Array.isArray(topic)) {
+            for (let tp of topic) {
+                if (!this._bus.hasOwnProperty(tp)) {
+                    has = false;
+                }
+            }
+
+            return has;
+        }
+
+        has = this._bus.hasOwnProperty(topic);
+
+        return has;
     }
 
     private _resetSubscriberIfExist(topic: string, id: string) {
