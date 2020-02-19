@@ -81,7 +81,7 @@ describe("Publisher's Unit Tests", () => {
         });
 
         let sub_2 = new Subsciber({
-            id: "sub_1",
+            id: "sub_2",
             topic: ["topic_1"],
             callback: (state) => {
                 console.log("It's sub_2");
