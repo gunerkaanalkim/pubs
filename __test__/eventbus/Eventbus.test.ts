@@ -160,4 +160,76 @@ describe("Eventbus's Unit Tests", () => {
             eventbus.subscriber.add(sub_2)
         }).toThrowError(new Error(Dialogs.Errors.SAME_SUBSCRIBER));
     });
+
+    it("subscribers with the non-topic should not be registered", () => {
+        const eventbus = new Eventbus();
+
+        let pub_1 = new Publisher({
+            topic: "topic_1",
+            state: {name: "Patrick Swayze"}
+        });
+
+        eventbus.publisher.add(pub_1);
+
+        let sub_1 = new Subsciber({
+            id: "sub_1",
+            topic: "topic_unknown",
+            callback: (state) => {
+                console.log(state);
+            }
+        });
+
+        expect(() => {
+            eventbus.subscriber.add(sub_1)
+        }).toThrowError(new Error(Dialogs.Errors.TOPIC_NOT_FOUND));
+    });
+
+    it("subscribers with the non-topic should not be registered with array type topic", () => {
+        const eventbus = new Eventbus();
+
+        let pub_1 = new Publisher({
+            topic: "topic_1",
+            state: {name: "Patrick Swayze"}
+        });
+
+        let pub_2 = new Publisher({
+            topic: "topic_2",
+            state: {name: "Demi Moore"}
+        });
+
+        eventbus.publisher.add(pub_1);
+        eventbus.publisher.add(pub_2);
+
+        let sub_1 = new Subsciber({
+            id: "sub_1",
+            topic: ["topic_unknown","topic_2"],
+            callback: (state) => {
+                console.log(state);
+            }
+        });
+
+        expect(() => {
+            eventbus.subscriber.add(sub_1)
+        }).toThrowError(new Error(Dialogs.Errors.TOPIC_NOT_FOUND));
+    });
+
+    it("Eventbus should have given topics", () => {
+        const eventbus = new Eventbus();
+
+        let pub_1 = new Publisher({
+            topic: "topic_1",
+            state: {name: "Patrick Swayze"}
+        });
+
+        let pub_2 = new Publisher({
+            topic: "topic_2",
+            state: {name: "Demi Moore"}
+        });
+
+        eventbus.publisher.add(pub_1);
+        eventbus.publisher.add(pub_2);
+
+        expect(eventbus.getTopics().hasOwnProperty("topic_1")).toBe(true);
+        expect(eventbus.getTopics().hasOwnProperty("topic_2")).toBe(true);
+    });
 });

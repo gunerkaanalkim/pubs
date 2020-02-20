@@ -14,12 +14,6 @@ describe("Publisher's Unit Tests", () => {
 
         expect(sub.id).toBe("sub_1");
         expect(sub.topic).toBe("topic_1");
-
-        sub.id = "another_sub";
-        sub.topic = "another_topic";
-
-        expect(sub.id).toBe("another_sub");
-        expect(sub.topic).toBe("another_topic");
     });
 
     it("multiple subscription", () => {
@@ -89,6 +83,32 @@ describe("Publisher's Unit Tests", () => {
         });
 
         [sub_1, sub_2].forEach(sub => eventbus.subscriber.add(sub));
+
+    });
+
+    it("should get eventbus object", () => {
+        let eventbus = new Eventbus();
+
+        let pub_1 = new Publisher({
+            topic: "topic_1",
+            state: {
+                msg: "This is topic_1"
+            }
+        });
+
+        eventbus.publisher.add(pub_1);
+
+        let sub_1 = new Subsciber({
+            id: "sub_1",
+            topic: ["topic_1"],
+            callback: (state) => {
+                console.log("It's sub_1");
+            }
+        });
+
+        eventbus.subscriber.add(sub_1);
+
+        expect(sub_1.eventbus).toStrictEqual(eventbus);
 
     });
 });
