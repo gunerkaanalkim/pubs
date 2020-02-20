@@ -7,15 +7,15 @@ interface SubscriberOption {
 }
 
 export default class Subsciber {
-    private _id: string;
-    private _topic: any;
-    private _callback: Function;
+    private readonly _id: string;
+    private readonly _topic: any;
+    private readonly _callback: Function;
     private _eventbus: Eventbus = undefined;
 
-    constructor(option?: SubscriberOption) {
-        this._id = option?.id;
-        this._topic = option?.topic;
-        this._callback = option?.callback;
+    constructor(option: SubscriberOption) {
+        this._id = option.id;
+        this._topic = option.topic;
+        this._callback = option.callback;
     }
 
 
@@ -23,24 +23,12 @@ export default class Subsciber {
         return this._id;
     }
 
-    set id(value: string) {
-        this._id = value;
-    }
-
     get topic(): string {
         return this._topic;
     }
 
-    set topic(value: string) {
-        this._topic = value;
-    }
-
     get callback(): Function {
         return this._callback;
-    }
-
-    set callback(value: Function) {
-        this._callback = value;
     }
 
     get eventbus(): Eventbus {

@@ -1,7 +1,7 @@
 import Publisher from "../publisher/publisher";
 import Subsciber from "../subscriber/subsciber";
-import {BusKeys} from "../constant/BusKeys";
-import publisher from "../publisher/publisher";
+import BusKeys from "../constant/BusKeys";
+import Dialogs from "../constant/Dialogs";
 
 export default class Eventbus {
     private _bus = {};
@@ -38,15 +38,15 @@ export default class Eventbus {
     private _addSubscriber(subscriber: Subsciber): Eventbus {
         const {id, topic, callback} = subscriber;
 
-        if (this._hasTopic(topic)) {
-            const state = this._getStateByTopic(topic);
-
-            this._addSubscriberToPublisher(topic, id, subscriber);
-            this._setEventbusToSubscriber(subscriber, this._bus);
-            this._fireSubscriber(subscriber, state, callback);
-        } else {
-            throw new Error("Topic not found on eventbus!");
+        if (this._topicHasSameSubscriber(topic, subscriber)) {
+            throw new Error(Dialogs.Errors.SAME_SUBSCRIBER);
         }
+
+        const state = this._getStateByTopic(topic);
+
+        this._addSubscriberToPublisher(topic, id, subscriber);
+        this._setEventbusToSubscriber(subscriber, this._bus);
+        this._fireSubscriber(subscriber, state, callback);
 
         return this;
     }
@@ -77,10 +77,27 @@ export default class Eventbus {
         callback.call(context, state);
     }
 
+    private _topicHasSameSubscriber(topic, subsciber: Subsciber) {
+        let has = false;
+
+        if (Array.isArray(topic)) {
+            for (let tpc of topic) {
+                if (this._hasTopic(tpc)) {
+                    has = this._bus[tpc][BusKeys.SUBSCRIBERS].hasOwnProperty(subsciber.id);
+                }
+            }
+        } else {
+            if (this._hasTopic(topic)) {
+                has = this._bus[topic][BusKeys.SUBSCRIBERS].hasOwnProperty(subsciber.id);
+            }
+        }
+
+        return has;
+    }
+
     /**
      * Mutators
      * **/
-
     private _resetTopicIfExist(topic: string) {
         if (this._bus.hasOwnProperty(topic)) {
             delete this._bus[topic];
@@ -92,47 +109,43 @@ export default class Eventbus {
     }
 
     private _getStateByTopic(topic: any): any {
-
         if (Array.isArray(topic)) {
             let states = {};
 
             for (let tp of topic) {
-                const state = this._bus[tp][BusKeys.STATE];
-                states[tp] = state;
+                if (this._hasTopic(tp)) {
+                    states[tp] = this._bus[tp][BusKeys.STATE];
+                }
             }
 
             return states;
+        } else {
+            if (this._hasTopic(topic)) {
+                return this._bus[topic][BusKeys.STATE]
+            }
         }
-
-        return this._bus[topic][BusKeys.STATE];
     }
 
     private _addSubscriberToPublisher(topic: string, id: string, subscriber: object): void {
         if (Array.isArray(topic)) {
             for (let tp of topic) {
-                this._bus[tp][BusKeys.SUBSCRIBERS][id] = subscriber;
+                if (this._hasTopic(tp)) {
+                    this._bus[tp][BusKeys.SUBSCRIBERS][id] = subscriber;
+                }
             }
         } else {
-            this._bus[topic][BusKeys.SUBSCRIBERS][id] = subscriber;
+            if (this._hasTopic(topic)) {
+                this._bus[topic][BusKeys.SUBSCRIBERS][id] = subscriber;
+            }
         }
     }
 
     private _hasTopic(topic: string): boolean {
-        let has = true;
-
-        if (Array.isArray(topic)) {
-            for (let tp of topic) {
-                if (!this._bus.hasOwnProperty(tp)) {
-                    has = false;
-                }
-            }
-
-            return has;
+        if (this._bus.hasOwnProperty(topic)) {
+            return true;
+        } else {
+            throw new Error(Dialogs.Errors.TOPIC_NOT_FOUND);
         }
-
-        has = this._bus.hasOwnProperty(topic);
-
-        return has;
     }
 
     private _resetSubscriberIfExist(topic: string, id: string) {
