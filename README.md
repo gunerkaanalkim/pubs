@@ -14,7 +14,7 @@
 Pubs is a client-side message broker written in Typescript. 
 The main idea is to provide state passing of web components between each other.
 Pubs is completely focused on component communication.
-To understand how the publisher / subscriber approach works, you can look at the image below.
+To understand how the publisher/subscriber approach works, you can look at the image below.
 
 
 <img src="https://user-images.githubusercontent.com/5802308/74986695-9dcd1e00-544a-11ea-8a5a-5f610b0a7408.png" alt="Build Status">
