@@ -3,6 +3,12 @@
   "scripts": {
     "test": "jest --collectCoverage=true"
   },
+  "keywords": [
+    "typescript",
+    "pubsub",
+    "message-broker",
+    "publisher-subscriber"
+  ],
   "version": "1.0.0-alpha",
   "main": "index.js",
   "repository": "https://github.com/gunerkaanalkim/pub-sub.git",
