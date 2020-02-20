@@ -1,1 +1,7 @@
-![circle-ci](https://circleci.com/gh/gunerkaanalkim/pubs.svg?style=svg)
+<p align="center">
+    <a href="https://circleci.com/gh/gunerkaanalkim/pubs/tree/dev"><img src="https://circleci.com/gh/gunerkaanalkim/pubs.svg?style=shield" alt="Build Status"></a>
+    <a href="https://codecov.io/gh/gunerkaanalkim/pub-sub"><img src="https://codecov.io/gh/gunerkaanalkim/pub-sub/branch/master/graph/badge.svg" /></a>
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg"/></a>
+</p>
+
+<h2 align="center"><b>PUBs : </b> a client-side message broker </h2>
