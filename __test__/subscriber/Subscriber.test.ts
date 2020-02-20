@@ -109,6 +109,5 @@ describe("Publisher's Unit Tests", () => {
         eventbus.subscriber.add(sub_1);
 
         expect(sub_1.eventbus).toStrictEqual(eventbus);
-
     });
 });
