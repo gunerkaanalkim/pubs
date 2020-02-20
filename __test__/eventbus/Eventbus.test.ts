@@ -1,6 +1,7 @@
 import Publisher from "../../src/publisher/publisher";
 import Eventbus from "../../src/eventbus/eventbus";
 import Subsciber from "../../src/subscriber/subsciber";
+import Dialogs from "../../src/constant/Dialogs";
 
 describe("Eventbus's Unit Tests", () => {
     it("should be initialized with constructor", () => {
@@ -125,5 +126,38 @@ describe("Eventbus's Unit Tests", () => {
         subs = eventbus.getSubscribersByTopic("topic_1");
 
         expect(subs["sub_2"]).toBe(undefined);
+    });
+
+    it("subscribers with the same id should not be registered", () => {
+        const eventbus = new Eventbus();
+
+        let pub_1 = new Publisher({
+            topic: "topic_1",
+            state: {name: "Patrick Swayze"}
+        });
+
+        eventbus.publisher.add(pub_1);
+
+        let sub_1 = new Subsciber({
+            id: "sub_1",
+            topic: "topic_1",
+            callback: (state) => {
+                console.log(state);
+            }
+        });
+
+        let sub_2 = new Subsciber({
+            id: "sub_1",
+            topic: "topic_1",
+            callback: (state) => {
+                console.log(state);
+            }
+        });
+
+        eventbus.subscriber.add(sub_1);
+
+        expect(() => {
+            eventbus.subscriber.add(sub_2)
+        }).toThrowError(new Error(Dialogs.Errors.SAME_SUBSCRIBER));
     });
 });
