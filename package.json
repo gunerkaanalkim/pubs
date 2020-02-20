@@ -1,5 +1,5 @@
 {
-  "name": "pub-sub",
+  "name": "pubs-js",
   "scripts": {
     "test": "jest --collectCoverage=true"
   },
