@@ -1,7 +1,7 @@
 import Publisher from "../publisher/publisher";
 import Subsciber from "../subscriber/subsciber";
-import {BusKeys} from "../constant/BusKeys";
-import publisher from "../publisher/publisher";
+import BusKeys from "../constant/BusKeys";
+import Dialogs from "../constant/Dialogs";
 
 export default class Eventbus {
     private _bus = {};
@@ -37,6 +37,10 @@ export default class Eventbus {
 
     private _addSubscriber(subscriber: Subsciber): Eventbus {
         const {id, topic, callback} = subscriber;
+
+        if (this._topicHasSameSubscriber(topic, subscriber)) {
+            throw new Error(Dialogs.Errors.SAME_SUBSCRIBER);
+        }
 
         if (this._hasTopic(topic)) {
             const state = this._getStateByTopic(topic);
@@ -75,6 +79,20 @@ export default class Eventbus {
 
     private _fireSubscriber(context: Subsciber, state: object, callback: Function): void {
         callback.call(context, state);
+    }
+
+    private _topicHasSameSubscriber(topic, subsciber: Subsciber) {
+        let has = false;
+
+        if (Array.isArray(topic)) {
+            for (let tpc of topic) {
+                has = this._bus[tpc][BusKeys.SUBSCRIBERS].hasOwnProperty(subsciber.id);
+            }
+        } else {
+            has = this._bus[topic][BusKeys.SUBSCRIBERS].hasOwnProperty(subsciber.id);
+        }
+
+        return has;
     }
 
     /**
