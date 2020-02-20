@@ -101,4 +101,19 @@ describe("Publisher's Unit Tests", () => {
             filmography: ["Ghost"]
         });
     });
+
+
+    it("should get eventbus object", () => {
+        let eventbus = new Eventbus();
+
+        let pub = new Publisher({
+            topic: "topic_X",
+            state: {}
+        });
+
+        eventbus.publisher.add(pub);
+
+        expect(pub.eventbus).toStrictEqual(eventbus);
+
+    });
 });
