@@ -65,6 +65,28 @@ pub.send({
     filmography: ["Ghost"]
 });
 ````
+<h2>Publisher's API</h2>
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>topic</td>
+            <td>string</td>
+            <td>none</td>
+        </tr>
+         <tr>
+            <td>state</td>
+            <td>any</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+
+
 ---
 
 <h2 align="center">Subscriber at a glance </h2>
