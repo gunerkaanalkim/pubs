@@ -14,7 +14,7 @@ Publisher is message sender for Eventbus that can send any type of message; stri
 Subscriber is message sink for Eventbust that subscribes to messages sent with the help of a callback method.
 
 <h2 align="center">Publisher at a glance </h2>
-Publisher publish a state object to eventbus with its `constructor and `send` method.
+Publisher publish a state object to eventbus with its `constructor` and `send` method.
 
 ````typescript
 let pub = new Publisher({
@@ -65,10 +65,12 @@ pub.send({
     filmography: ["Ghost"]
 });
 ````
+---
 
 <h2 align="center">Subscriber at a glance </h2>
 Subscribers listens to a `topic` on the `eventbus` using a `callback` method.
 Subscriber initialize with constructor method.
+Subscribers must have a unique `id` attribute.
 
 ````typescript
 let sub = new Subsciber({
@@ -92,19 +94,93 @@ let sub = new Subsciber({
 });
 ```
 
+Different subscribers can listen common topic on eventbus.
+
+```typescript
+let pub_1 = new Publisher({
+    topic: "topic_1",
+//...
+
+let sub_1 = new Subsciber({
+    id: "sub_1",
+    topic: ["topic_1"],
+    callback: (state) => {
+        console.log("It's sub_1");
+    }
+});
+
+let sub_2 = new Subsciber({
+    id: "sub_2",
+    topic: ["topic_1"],
+    callback: (state) => {
+        console.log("It's sub_2");
+    }
+});
+```
+
+---
+
 <h2 align="center">Eventbus at a glance </h2>
 Eventbus stores `topic` and `state`. Eventbus initialize with contructor method.
+Eventbus have two public object; `publisher` & `subscriber`
 
 ```typescript
 let eventbus = new Eventbus();
 ```
 
-Eventbus have two public object; `publisher` `subscriber`
 <h3>Publisher Object</h2>
-Publisher object registers a publisher on eventbus with `add` method.
+
+Publishers can register with add method of publisher object.
 
 ```typescript
-//let fooPublisher = new Publisher
+const eventbus = new Eventbus();
 
+let pub_1 = new Publisher({
+    topic: "topic_1",
+    state: {name: "Patrick Swayze"}
+});
 
+let pub_2 = new Publisher({
+    topic: "topic_2",
+    state: {name: "Demi Moore"}
+});
+
+let pub_3 = new Publisher({
+    topic: "topic_3",
+    state: {name: "Whoopi Goldberg"}
+});
+
+eventbus.publisher.add(pub_1);
+eventbus.publisher.add(pub_2);
+eventbus.publisher.add(pub_3);
+```
+
+<h3>Subscriber Object</h2>
+
+Subscribers can register with add method of eventbus.
+
+```typescript
+const eventbus = new Eventbus();
+
+let sub_1 = new Subsciber({
+    id: "sub_1",
+    topic: "topic_1",
+    callback: (state) => console.log(state)
+});
+
+let sub_2 = new Subsciber({
+    id: "sub_2",
+    topic: "topic_2",
+    callback: (state) => console.log(state)
+});
+
+let sub_3 = new Subsciber({
+    id: "sub_3",
+    topic: ["topic_1", "topic_2"],
+    callback: (state) => console.log(state)
+});
+
+eventbus.subscriber.add(sub_1);
+eventbus.subscriber.add(sub_2);
+eventbus.subscriber.add(sub_3);
 ```
