@@ -128,7 +128,7 @@ Eventbus have two public object; `publisher` & `subscriber`
 let eventbus = new Eventbus();
 ```
 
-<h3>Publisher Object</h2>
+<h3>Publisher Object</h3>
 
 Publishers can register with add method of publisher object.
 
@@ -155,7 +155,7 @@ eventbus.publisher.add(pub_2);
 eventbus.publisher.add(pub_3);
 ```
 
-<h3>Subscriber Object</h2>
+<h3>Subscriber Object</h3>
 
 Subscribers can register with add method of eventbus.
 
