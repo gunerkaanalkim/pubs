@@ -14,7 +14,7 @@ Publisher is message sender for Eventbus that can send any type of message; stri
 Subscriber is message sink for Eventbust that subscribes to messages sent with the help of a callback method.
 
 <h2 align="center">Publisher at a glance </h2>
-Publisher publish a state object to eventbus with its constructor and `send` method.
+Publisher publish a state object to eventbus with its `constructor and `send` method.
 
 ````typescript
 let pub = new Publisher({
@@ -27,7 +27,7 @@ let pub = new Publisher({
 });
 ````
 
-Topic and state attributes can change later with setter & getter.
+Topic and state attributes can change later with `setter` & `getter`
 
 ````typescript
 let pub = new Publisher({
@@ -43,9 +43,54 @@ pub.topic = "another_topic"
 pub.state = { foo: "bar" }
 
 ````
+You can publish the state to the `eventbus` using the `send` method.
+
+````typescript
+let eventbus = new Eventbus();
+
+let pub = new Publisher({
+    topic: "topic_1",
+    state: {}
+});
+
+eventbus.publisher.add(pub);
+
+// Foo
+// Bar
+// Tar
+
+pub.send({
+    name: "Patrick",
+    surname: "Swayze",
+    filmography: ["Ghost"]
+});
+````
 
 <h2 align="center">Subscriber at a glance </h2>
+Subscribers listens to a `topic` on the `eventbus` using a `callback` method.
+Subscriber initialize with constructor method.
 
+````typescript
+let sub = new Subsciber({
+    id: "sub_1",
+    topic: "topic_1",
+    callback: (state) => {
+        console.log(state);
+    }
+});
+````
+
+Subscribers can be listen multiple topic.
+
+```typescript
+let sub = new Subsciber({
+    id: "sub_1",
+    topic: ["topic_1", "topic_2", "topic_3"],
+    callback: (state) => {
+        console.log(state);
+    }
+});
+```
 
 <h2 align="center">Eventbus at a glance </h2>
 Eventbus stores `topic` and `state`. Eventbus initialize with contructor method.
