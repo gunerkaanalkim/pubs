@@ -50,6 +50,13 @@
 ---
 
 <h2 align="center" id="introduction">Introduction</h2>
+Pubs is a client-side message broker written in Typescript. 
+The main idea is to provide state passing of web components between each other.
+Pubs is completely focused on component communication.
+To understand how the publisher/subscriber approach works, you can look at the image below.
+
+<img src="https://user-images.githubusercontent.com/5802308/74986695-9dcd1e00-544a-11ea-8a5a-5f610b0a7408.png" alt="Build Status">
+
 Pubs basically consists of three parts; Eventbus, Publisher and Subscriber.
 Eventbus stores `topic` and `state`. 
 Publisher is message sender for Eventbus that can send any type of message; string, array, number etc.
