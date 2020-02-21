@@ -37,20 +37,20 @@
         <a href="#a-complete-example">A Complete Example</a>
     </li>
     <li>
-            <a href="#a-complete-example">With React</a>
+            <a href="#with-react">With React</a>
     </li>
     <li>
-            <a href="#a-complete-example">With Vue</a>
+            <a href="#with-vue">With Vue</a>
     </li>
     <li>
-            <a href="#a-complete-example">With Angular</a>
+            <a href="#with-angular">With Angular</a>
     </li>
 </ul>
 
 ---
 
 <h2 align="center" id="introduction">Introduction</h2>
-Pubs :heartbeat: basically consists of three parts; Eventbus, Publisher and Subscriber.
+Pubs basically consists of three parts; Eventbus, Publisher and Subscriber.
 Eventbus stores `topic` and `state`. 
 Publisher is message sender for Eventbus that can send any type of message; string, array, number etc.
 Subscriber is message sink for Eventbust that subscribes to messages sent with the help of a callback method.
@@ -169,7 +169,7 @@ let sub_2 = new Subsciber({
 ```
 
 <h2 id="subscribers-api">Subscribers's API</h2>
-TODO
+Coming soon
 
 ---
 
@@ -239,9 +239,18 @@ eventbus.subscriber.add(sub_3);
 ```
 
 <h2 id="eventbus-api">Eventbus's API</h2>
-TODO
+Coming soon
 
 ---
 
 <h2 align="center" id="a-complete-example">A Complete Example</h2>
-TODO
+Coming soon
+
+<h2 align="center" id="with-react">With React</h2>
+Coming soon
+
+<h2 align="center" id="with-vue">With Vue</h2>
+Coming soon
+
+<h2 align="center" id="with-angular">With Angular</h2>
+Coming soon
