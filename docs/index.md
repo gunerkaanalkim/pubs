@@ -7,9 +7,40 @@
     <a href="https://www.npmjs.com/package/pubs-js"><img src="https://img.shields.io/npm/v/pubs-js.svg?color=yellow"/></a>
 </p>
 
-<a href="#publisher-at-a-glance">publisher-at-a-glance</a>
+<h2 align="center">Index</h2>
 
-<h2 align="center">Introduction</h2>
+<ul>
+    <li>
+        <a href="#introduction">Introduction</a>
+    </li>
+    <li> 
+        <a href="#publisher-at-a-glance">Publisher at a glance</a> 
+        <ul>
+            <li><a href="#publishers-api">Publisher's API</a></li>
+        </ul>
+    </li>
+    <li> 
+        <a href="#subscriber-at-a-glance">Subscriber at a glance</a> 
+        <ul>
+            <li><a href="#subscribers-api">Subscribers's API</a></li>
+        </ul>
+    </li>
+    <li> 
+        <a href="#eventbus-at-a-glance">Eventbus at a glance</a> 
+        <ul>
+            <li><a href="#publisher-object">Publisher Object</a></li>
+            <li><a href="#subscriber-object">Subscriber Object</a></li>
+            <li><a href="#eventbus-api">Eventbus's API</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#a-complete-example">A Complete Example</a>
+    </li>
+</ul>
+
+---
+
+<h2 align="center" id="introduction">Introduction</h2>
 Pubs basically consists of three parts; Eventbus, Publisher and Subscriber.
 Eventbus stores `topic` and `state`. 
 Publisher is message sender for Eventbus that can send any type of message; string, array, number etc.
@@ -67,31 +98,17 @@ pub.send({
     filmography: ["Ghost"]
 });
 ````
-<h2>Publisher's API</h2>
-<table width="100%">
-    <thead>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>topic</td>
-            <td>string</td>
-            <td>none</td>
-        </tr>
-         <tr>
-            <td>state</td>
-            <td>any</td>
-            <td>none</td>
-        </tr>
-    </tbody>
-</table>
+<h2 id="publishers-api">Publisher's API</h2>
+
+| Name            | Type                          | Description                  |
+|-----------------|-------------------------------|------------------------------|
+| topic           | string                        | none                         |
+| state           | any                           | none                         |
 
 
 ---
 
-<h2 align="center">Subscriber at a glance </h2>
+<h2 align="center" id="subscriber-at-a-glance">Subscriber at a glance </h2>
 Subscribers listens to a `topic` on the `eventbus` using a `callback` method.
 Subscriber initialize with constructor method.
 Subscribers must have a unique `id` attribute.
@@ -142,9 +159,12 @@ let sub_2 = new Subsciber({
 });
 ```
 
+<h2 id="subscribers-api">Subscribers's API</h2>
+TODO
+
 ---
 
-<h2 align="center">Eventbus at a glance </h2>
+<h2 align="center" id="eventbus-at-a-glance">Eventbus at a glance </h2>
 Eventbus stores `topic` and `state`. Eventbus initialize with contructor method.
 Eventbus have two public object; `publisher` & `subscriber`
 
@@ -152,7 +172,7 @@ Eventbus have two public object; `publisher` & `subscriber`
 let eventbus = new Eventbus();
 ```
 
-<h3>Publisher Object</h3>
+<h3 id="publisher-object">Publisher Object</h3>
 
 Publishers can register with add method of publisher object.
 
@@ -179,7 +199,7 @@ eventbus.publisher.add(pub_2);
 eventbus.publisher.add(pub_3);
 ```
 
-<h3>Subscriber Object</h3>
+<h3 id="subscriber-object">Subscriber Object</h3>
 
 Subscribers can register with add method of eventbus.
 
@@ -208,3 +228,11 @@ eventbus.subscriber.add(sub_1);
 eventbus.subscriber.add(sub_2);
 eventbus.subscriber.add(sub_3);
 ```
+
+<h2 id="eventbus-api">Eventbus's API</h2>
+TODO
+
+---
+
+<h2 align="center" id="a-complete-example">A Complete Example</h2>
+TODO
