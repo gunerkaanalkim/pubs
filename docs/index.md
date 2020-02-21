@@ -66,7 +66,7 @@ pub.send({
 });
 ````
 <h2>Publisher's API</h2>
-<table>
+<table width="100%">
     <thead>
         <th>Name</th>
         <th>Type</th>
