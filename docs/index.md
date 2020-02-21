@@ -36,12 +36,21 @@
     <li>
         <a href="#a-complete-example">A Complete Example</a>
     </li>
+    <li>
+            <a href="#a-complete-example">With React</a>
+    </li>
+    <li>
+            <a href="#a-complete-example">With Vue</a>
+    </li>
+    <li>
+            <a href="#a-complete-example">With Angular</a>
+    </li>
 </ul>
 
 ---
 
 <h2 align="center" id="introduction">Introduction</h2>
-Pubs basically consists of three parts; Eventbus, Publisher and Subscriber.
+Pubs :heartbeat: basically consists of three parts; Eventbus, Publisher and Subscriber.
 Eventbus stores `topic` and `state`. 
 Publisher is message sender for Eventbus that can send any type of message; string, array, number etc.
 Subscriber is message sink for Eventbust that subscribes to messages sent with the help of a callback method.
