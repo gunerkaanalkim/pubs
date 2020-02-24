@@ -21,7 +21,7 @@
   "files": [
     "lib/**/*"
   ],
-  "version": "1.0.0-alpha",
+  "version": "1.1.1",
   "main": "index.js",
   "repository": "https://github.com/gunerkaanalkim/pub-sub.git",
   "author": "Kaan Alkim <g.kaanalkim@gmail.com>",

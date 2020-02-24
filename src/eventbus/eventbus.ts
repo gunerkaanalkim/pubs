@@ -1,10 +1,10 @@
-import Publisher from "../publisher/publisher";
-import Subsciber from "../subscriber/subsciber";
-import BusKeys from "../constant/BusKeys";
-import Dialogs from "../constant/Dialogs";
+import Publisher from '../publisher/publisher';
+import Subsciber from '../subscriber/subsciber';
+import BusKeys from '../constant/BusKeys';
+import Dialogs from '../constant/Dialogs';
 
 interface BusSubscribers {
-  [key: string]: Subsciber
+  [key: string]: Subsciber;
 }
 
 export default class Eventbus {
@@ -12,12 +12,12 @@ export default class Eventbus {
 
   public publisher = {
     add: this._addPublisher.bind(this),
-    remove: this._removePublisher.bind(this)
+    remove: this._removePublisher.bind(this),
   };
 
   public subscriber = {
     add: this._addSubscriber.bind(this),
-    remove: this._removeSubscriber.bind(this)
+    remove: this._removeSubscriber.bind(this),
   };
 
   private _addPublisher(publisher: Publisher): Eventbus {
