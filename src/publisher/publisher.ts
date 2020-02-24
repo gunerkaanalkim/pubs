@@ -52,7 +52,7 @@ export default class Publisher {
     }
   }
 
-  private _fireSubscriber(context: Subsciber, state: object, callback: () => any): void {
+  private _fireSubscriber(context: Subsciber, state: object, callback: any): void {
     callback.call(context, state);
   }
 }

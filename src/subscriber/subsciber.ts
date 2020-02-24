@@ -1,15 +1,16 @@
-import Eventbus from '../eventbus/eventbus';
+import Eventbus from "../eventbus/eventbus";
 
 interface SubscriberOption {
   id: string;
   topic: any;
-  callback: () => any;
+
+  callback(state: object): void;
 }
 
 export default class Subsciber {
   private readonly _id: string;
   private readonly _topic: any;
-  private readonly _callback: () => any;
+  private readonly _callback: (state: object) => void;
   private _eventbus?: Eventbus;
 
   constructor(option: SubscriberOption) {
@@ -26,7 +27,7 @@ export default class Subsciber {
     return this._topic;
   }
 
-  get callback(): () => any {
+  get callback(): any {
     return this._callback;
   }
 
