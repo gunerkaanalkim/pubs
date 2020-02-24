@@ -1,6 +1,6 @@
 enum BusKeys {
-  STATE = "state",
-  SUBSCRIBERS = "subscribers",
+  STATE = 'state',
+  SUBSCRIBERS = 'subscribers',
 }
 
 export default BusKeys;

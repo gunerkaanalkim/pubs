@@ -1,4 +1,4 @@
-import Eventbus from "../eventbus/eventbus";
+import Eventbus from '../eventbus/eventbus';
 
 interface SubscriberOption {
   id: string;
